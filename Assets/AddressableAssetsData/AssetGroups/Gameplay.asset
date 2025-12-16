@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Gameplay
+  m_EditorClassIdentifier: 
+  m_GroupName: Gameplay
+  m_GUID: b66fc6172068d9144adf27b53d63545f
+  m_SerializeEntries:
+  - m_GUID: 161f3833d674a9546b8b547ef639a9c5
+    m_Address: Player
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1aaeff83feb7e6f44a3113e9a268d5ad
+    m_Address: ShootingBall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38e0bc83da84c7e468617391e5421f5b
+    m_Address: GolfHole
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93e95381b5a0c564fabe89c873e8f6ee
+    m_Address: GameplayFinishPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1525f89cee131445bc9311acd7bdb7a
+    m_Address: GameplayPausePopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c63ea6155905f6d4689571aff80e33a6
+    m_Address: GolfBoard
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccf69ffb500e9ab49a077478fbed7246
+    m_Address: GameplayStatusScreen
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6ffa27ad7c472a42b87a8c35cc5ebfa
+    m_Address: GameplayScreen
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 939c16929445d584488670cb0ac7e0b1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ab9543a3b9dc594448d218af6cf62b84, type: 2}
+    - {fileID: 11400000, guid: 68460940af1fb534f837f0accab4523b, type: 2}
