@@ -947,6 +947,8 @@ MonoBehaviour:
   _closeButton: {fileID: 0}
   _alternativeCloseButton: {fileID: 0}
   _finishScoreText: {fileID: 4244056509685339765}
+  _restartButton: {fileID: 4593082099556281613}
+  _quitButton: {fileID: 5342207082945029730}
 --- !u!1 &7584263235354495054
 GameObject:
   m_ObjectHideFlags: 0

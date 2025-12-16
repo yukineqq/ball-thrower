@@ -28,6 +28,12 @@ public sealed class GolfHole : Entity
         ResetCts();
     }
 
+    private void OnDestroy()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+
     private void Update()
     {
         HanldeModeTransitionRandomization();
@@ -52,8 +58,6 @@ public sealed class GolfHole : Entity
             return;
         }
 
-        IsNegative = isNegative;
-
         Color initialGolfHoleColor = _renderer.material.color;
 
         Color golfHoleEndColor = isNegative ? _config.GolfHoleNegativeColor : _config.GolfHolePositiveColor;
@@ -61,6 +65,8 @@ public sealed class GolfHole : Entity
 
         if (immediately)
         {
+            IsNegative = isNegative;
+
             _renderer.material.color = golfHoleEndColor;
             _indicatorRenderer.material.color = _config.IndicatorRegularColor;
             return;
@@ -71,11 +77,13 @@ public sealed class GolfHole : Entity
             _busy = true;
 
             _modeTransitionTween = DOTween.Sequence()
-            .Join(_indicatorRenderer.material.DOColor(indicatorEndColor, transitionDuration));
+                .Join(_indicatorRenderer.material.DOColor(indicatorEndColor, transitionDuration));
 
             _modeTransitionTween.Play();
 
             await _modeTransitionTween.AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(_cts.Token);
+
+            IsNegative = isNegative;
         }
         finally
         {

@@ -31,7 +31,14 @@ public sealed class ApplicationInstaller : MonoInstaller
 
         BindInputService();
 
+        BindSavingService();
+
         BindApplicationRunner();
+    }
+
+    private void BindSavingService()
+    {
+        Container.BindInterfacesAndSelfTo<SavingService>().AsSingle();
     }
 
     private void BindInputService()

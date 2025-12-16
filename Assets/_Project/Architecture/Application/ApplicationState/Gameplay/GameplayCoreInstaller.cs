@@ -19,6 +19,8 @@ public sealed class GameplayCoreInstaller : MonoInstaller
 
         BindUIManager();
 
+        BindPlayingSessionHelper();
+
         BindSpawnService();
 
         BindPlayerManager();
@@ -55,6 +57,11 @@ public sealed class GameplayCoreInstaller : MonoInstaller
     private void BindSpawnService()
     {
         Container.BindInterfacesAndSelfTo<SpawnService>().AsSingle();
+    }
+
+    private void BindPlayingSessionHelper()
+    {
+        Container.BindInterfacesAndSelfTo<PlayingSessionHelper>().AsSingle();
     }
 
     private void BindUIManager()

@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Gameplay
   m_GUID: b66fc6172068d9144adf27b53d63545f
   m_SerializeEntries:
+  - m_GUID: 111e58f201e05e6438137574e3396a87
+    m_Address: TrajectoryLine
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gameplay
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 161f3833d674a9546b8b547ef639a9c5
     m_Address: Player
     m_ReadOnly: 0

@@ -32,11 +32,7 @@ public sealed class InputService : IInputService, IInitializable, IDisposable
         {
             Cursor.visible = true;
 
-#if UNITY_EDITOR
             Cursor.lockState = CursorLockMode.None;
-            return;
-#endif
-            Cursor.lockState = CursorLockMode.Confined;
             return;
         }
 

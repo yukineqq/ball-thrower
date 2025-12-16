@@ -6,13 +6,15 @@ public sealed class GameBootstrapState : BaseGameState
     private readonly SceneRootUI _sceneRootUI;
     private readonly IAssetProvider _assetProvider;
     private readonly IStaticDataService _staticDataService;
+    private readonly ISavingService _savingService;
 
     public GameBootstrapState(GameStateMachine gameStateMachine, UIRootView uiRoot, SceneRootUI sceneRootUI,
-        IAssetProvider assetProvider, IStaticDataService staticDataService) : base(gameStateMachine, uiRoot)
+        IAssetProvider assetProvider, IStaticDataService staticDataService, ISavingService savingService) : base(gameStateMachine, uiRoot)
     {
         _sceneRootUI = sceneRootUI;
         _staticDataService = staticDataService;
         _assetProvider = assetProvider;
+        _savingService = savingService;
     }
 
     public override async UniTask Enter()
@@ -35,5 +37,6 @@ public sealed class GameBootstrapState : BaseGameState
         Debug.Log("initializing services in bootstrap state");
         await _assetProvider.InitializeAsync();
         await _staticDataService.InitializeAsync();
+        _savingService.LoadProgress();
     }
 }

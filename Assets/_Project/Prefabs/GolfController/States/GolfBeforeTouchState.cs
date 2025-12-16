@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 
 public sealed class GolfBeforeTouchState : GolfState
 {
     private readonly IInputHandler _input;
 
-    public GolfBeforeTouchState(GolfStateMachine stateMachine, GolfReusableData reusableData, GolfBoard board, IInputHandler inputHandler) : base(stateMachine, reusableData, board)
+    public GolfBeforeTouchState(GolfStateMachine stateMachine, GolfReusableData reusableData, IInputHandler inputHandler) : base(stateMachine, reusableData)
     {
         _input = inputHandler;
     }
@@ -16,7 +15,7 @@ public sealed class GolfBeforeTouchState : GolfState
         base.Enter();
 
         _reusableData.Ball.gameObject.SetActive(true);
-        _reusableData.Ball.Teleport(_board.BallSpawnpoint);
+        _reusableData.Ball.Teleport(_reusableData.Board.BallSpawnpoint);
         _reusableData.Ball.SetIsKinematic(true);
 
         ShuffleGolfHoles();
@@ -47,7 +46,7 @@ public sealed class GolfBeforeTouchState : GolfState
 
     private void ShuffleGolfHoles()
     {
-        List<Vector3> spawnPositions = _board.GetSpawnPositions();
+        List<Vector3> spawnPositions = _reusableData.Board.GetSpawnPositions();
 
         foreach (var golfHole in _reusableData.GolfHoles)
         {

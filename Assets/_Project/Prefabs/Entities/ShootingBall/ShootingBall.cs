@@ -12,13 +12,13 @@ public sealed class ShootingBall : Entity
     public event Action<GolfHole> HoleHit;
     public event Action Timeout;
 
-    public void Shoot(Vector3 direction, float force)
+    public void Shoot(Vector3 direction, float force, float timeoutDelay)
     {
         SetIsKinematic(false);
 
         _rigidbody.AddForce(direction * force, ForceMode.Impulse);
 
-        _slowdownCoroutine = StartCoroutine(OnTimeout());
+        _slowdownCoroutine = StartCoroutine(OnTimeout(timeoutDelay));
     }
 
     public void Teleport(Vector3 position)
@@ -47,9 +47,9 @@ public sealed class ShootingBall : Entity
         }
     }
 
-    private IEnumerator OnTimeout()
+    private IEnumerator OnTimeout(float timeoutDelay = 5f)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeoutDelay);
 
         Timeout?.Invoke();
     }

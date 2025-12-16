@@ -4,13 +4,11 @@ public abstract class GolfState : SyncBaseState
 {
     protected readonly GolfStateMachine _stateMachine;
     protected readonly GolfReusableData _reusableData;
-    protected readonly GolfBoard _board;
 
-    public GolfState(GolfStateMachine stateMachine, GolfReusableData reusableData, GolfBoard board)
+    public GolfState(GolfStateMachine stateMachine, GolfReusableData reusableData)
     {
         _stateMachine = stateMachine;
         _reusableData = reusableData;
-        _board = board;
     }
 
     public override void Enter()
@@ -33,6 +31,32 @@ public abstract class GolfState : SyncBaseState
         foreach (var hole in _reusableData.GolfHoles)
         {
             hole.PreventModeTransition();
+        }
+    }
+
+    protected override void AddSubscriptions()
+    {
+        base.AddSubscriptions();
+
+        _reusableData.Timer.SecondsLeftChanged += OnTimerValueChanged;
+    }
+
+    protected override void RemoveSubscriptions()
+    {
+        base.RemoveSubscriptions();
+
+        _reusableData.Timer.SecondsLeftChanged -= OnTimerValueChanged;
+    }
+
+    private void OnTimerValueChanged(float value)
+    {
+        if (value <= 0f)
+        {
+            _reusableData.Timer.SetEnabled(false);
+
+            RemoveSubscriptions();
+
+            _stateMachine.EnterState<GolfFinishState>();
         }
     }
 }

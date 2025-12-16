@@ -5,11 +5,13 @@ using UnityEngine;
 public sealed class GameplayPauseState : BaseSceneState
 {
     private readonly GameplayUIManager _uiManager;
+    private readonly PlayingSessionHelper _sessionHelper;
     private readonly GolfTimer _timer;
     public GameplayPauseState(GameStateMachine gameStateMachine, SceneStateMachine sceneStateMachine, 
-        UIRootView uiRoot, GameplayUIManager uiManager, GolfTimer golfTimer) : base(gameStateMachine, sceneStateMachine, uiRoot)
+        UIRootView uiRoot, GameplayUIManager uiManager, PlayingSessionHelper sessionHelper, GolfTimer golfTimer) : base(gameStateMachine, sceneStateMachine, uiRoot)
     {
         _uiManager = uiManager;
+        _sessionHelper = sessionHelper;
         _timer = golfTimer;
     }
 
@@ -17,6 +19,7 @@ public sealed class GameplayPauseState : BaseSceneState
     {
         await base.Enter();
 
+        _sessionHelper.SaveProgress();
         _timer.SetEnabled(false);
         Time.timeScale = 0f;
 
