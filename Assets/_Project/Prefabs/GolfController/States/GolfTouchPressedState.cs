@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public sealed class GolfTouchPressedState : GolfState
@@ -54,36 +53,6 @@ public sealed class GolfTouchPressedState : GolfState
 
     private void OnPressPositionChanged(Vector2 position)
     {
-        Vector2 differenceVector = _reusableData.CurrentTouchStartPosition - position;
-        Vector3 direction = new Vector3(differenceVector.x, 0f, differenceVector.y).normalized;
-
-        float power = 10f;
-        Vector3 initialVelocity = direction * power;
-
-        Transform ballTransform = _reusableData.Ball.transform;
-
-        _trajectoryLine.transform.position = new Vector3(ballTransform.position.x, 0.1f, ballTransform.position.z);
-
-        int trajectoryLength = 15;
-        LineRenderer lineRenderer = _trajectoryLine.LineRenderer;
-        lineRenderer.positionCount = trajectoryLength;
-
-        Vector3 velocity = initialVelocity;
-        Vector3 positionAtTime = ballTransform.position;
-
-        for (int i = 0; i < trajectoryLength; i++)
-        {
-            Vector3 newPosition = positionAtTime + velocity * 0.1f;
-
-            RaycastHit hit;
-            if (Physics.Raycast(positionAtTime, velocity, out hit, Vector3.Distance(positionAtTime, newPosition)))
-            {
-                lineRenderer.SetPosition(i, hit.point);
-                break;
-            }
-
-            lineRenderer.SetPosition(i, newPosition);
-            positionAtTime = newPosition;
-        }
+        _trajectoryLine.ShootLaser(_reusableData.CurrentTouchStartPosition, position, _reusableData.Ball.transform);
     }
 }
