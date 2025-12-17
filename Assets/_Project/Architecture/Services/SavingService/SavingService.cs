@@ -2,22 +2,16 @@ using System.IO;
 using UnityEngine;
 using Zenject;
 
-public sealed class SavingService : ISavingService, IInitializable
+public sealed class SavingService : ISavingService
 {
     private const string SAVE_KEY = "save.ballthrower";
-    private readonly IStaticDataService _staticDataService;
     private DefaultGameProgressStateConfig _config;
     private GameProgressState _gameProgressState;
     public GameProgressStateProxy GameProgressStateProxy { get; private set; }
 
     public SavingService(IStaticDataService staticDataService)
     {
-        _staticDataService = staticDataService;
-    }
-
-    public void Initialize()
-    {
-        _config = _staticDataService.GetResourcesSingleConfigByPath<DefaultGameProgressStateConfig>("Configs/Gameplay/DefaultGameProgressStateConfig");
+        _config = staticDataService.GetResourcesSingleConfigByPath<DefaultGameProgressStateConfig>("Configs/Gameplay/DefaultGameProgressStateConfig"); ;
     }
 
     public GameProgressStateProxy LoadProgress()
@@ -47,6 +41,7 @@ public sealed class SavingService : ISavingService, IInitializable
 
     private GameProgressStateProxy CreateDefaultProgressState()
     {
+        if (_config == null) { Debug.Log("LSKDJLFKJDLFKJDLKFJLKDJLKFJLKKJFDLDKLKJF"); }
         _gameProgressState = new GameProgressState() { Balance = _config.Balance, HighScore = _config.Highscore };
 
         return new GameProgressStateProxy(_gameProgressState);

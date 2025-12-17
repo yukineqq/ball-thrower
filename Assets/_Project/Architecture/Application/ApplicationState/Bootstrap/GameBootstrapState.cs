@@ -36,7 +36,6 @@ public sealed class GameBootstrapState : BaseGameState
     {
         Debug.Log("initializing services in bootstrap state");
         await _assetProvider.InitializeAsync();
-        await _staticDataService.InitializeAsync();
         _savingService.LoadProgress();
     }
 }

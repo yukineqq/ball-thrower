@@ -10,7 +10,8 @@ public sealed class GameplayPoolingService : PoolingService
 
     public override void Initialize()
     {
-        RegisterPool<UIObjectPool>();
+        base.Initialize();
+
         RegisterPool<EntitiesObjectPool>();
     }
 }

@@ -9,8 +9,6 @@ public sealed class ApplicationInstaller : MonoInstaller
 
         BindAssetProvider();
 
-        BindAddressablePrefabInstaller();
-
         BindRootUI();
 
         BindSceneRootUI();
@@ -97,11 +95,6 @@ public sealed class ApplicationInstaller : MonoInstaller
         var uiRoot = Object.Instantiate(prefabUIRootView);
         Object.DontDestroyOnLoad(uiRoot.gameObject);
         Container.BindInterfacesAndSelfTo<UIRootView>().FromInstance(uiRoot).AsSingle().NonLazy();
-    }
-
-    private void BindAddressablePrefabInstaller()
-    {
-        Container.BindInterfacesAndSelfTo<AddressablePrefabInstantiator>().AsSingle();
     }
 
     private void BindAssetProvider()

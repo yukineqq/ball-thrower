@@ -2,10 +2,10 @@ using UnityEngine;
 
 public sealed class SpawnService : ISpawnService
 {
-    private readonly GameplayPoolingService _poolingService;
+    private readonly IPoolingService _poolingService;
     private readonly AddressablePrefabInstantiator _addressablePrefabInstantiator;
 
-    public SpawnService(GameplayPoolingService poolingService, AddressablePrefabInstantiator addressablePrefabInstantiator)
+    public SpawnService(IPoolingService poolingService, AddressablePrefabInstantiator addressablePrefabInstantiator)
     {
         _poolingService = poolingService;
         _addressablePrefabInstantiator = addressablePrefabInstantiator;

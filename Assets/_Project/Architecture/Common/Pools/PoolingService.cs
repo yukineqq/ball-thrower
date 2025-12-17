@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public abstract class PoolingService : IInitializable, IDisposable
+public abstract class PoolingService : IPoolingService, IInitializable, IDisposable
 {
     private readonly IInstantiator _instantiator;
     private readonly PoolingServiceConfig _config;
@@ -15,7 +15,10 @@ public abstract class PoolingService : IInitializable, IDisposable
         _config = staticDataService.GetResourcesSingleConfigByPath<PoolingServiceConfig>("Configs/Infrastructure/PoolingServiceConfig");
     }
 
-    public abstract void Initialize();
+    public virtual void Initialize()
+    {
+        RegisterPool<UIObjectPool>();
+    }
 
     public void Dispose()
     {

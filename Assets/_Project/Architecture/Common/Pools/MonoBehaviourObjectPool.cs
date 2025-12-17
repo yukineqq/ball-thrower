@@ -44,15 +44,15 @@ public abstract class MonoBehaviourObjectPool<T, TFactory> : IMonoBehaviourObjec
 
     public TSpecified Get<TSpecified>() where TSpecified : MonoBehaviour
     {
-        return GetInternal<TSpecified>(default, default, null);
+        return GetInternal<TSpecified>(default, default, null, true);
     }
 
-    public TSpecified Get<TSpecified>(Vector3 position = default, Quaternion rotation = default, Transform parent = null) where TSpecified : MonoBehaviour
+    public TSpecified Get<TSpecified>(Vector3 position = default, Quaternion rotation = default, Transform parent = null, bool worldsPositionsStays = true) where TSpecified : MonoBehaviour
     {
-        return GetInternal<TSpecified>(position, rotation, parent);
+        return GetInternal<TSpecified>(position, rotation, parent, worldsPositionsStays);
     }
 
-    private TSpecified GetInternal<TSpecified>(Vector3 position, Quaternion rotation, Transform parent) where TSpecified : MonoBehaviour
+    private TSpecified GetInternal<TSpecified>(Vector3 position, Quaternion rotation, Transform parent, bool worldsPositionsStays = true) where TSpecified : MonoBehaviour
     {
         TSpecified instanceToReturn = null;
 
@@ -80,7 +80,7 @@ public abstract class MonoBehaviourObjectPool<T, TFactory> : IMonoBehaviourObjec
             instanceToReturn = Create<TSpecified>(position, rotation, parent);
         }
 
-        instanceToReturn.transform.parent = parent;
+        instanceToReturn.transform.SetParent(parent, worldsPositionsStays);
         instanceToReturn.transform.position = position;
         instanceToReturn.transform.rotation = rotation;
 

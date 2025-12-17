@@ -5,6 +5,14 @@ public sealed class MainMenuCoreInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        BindAddressablePrefabInstantiator();
+
+        BindPoolContainersManager();
+
+        BindMainMenuFactories();
+
+        BindPoolingService();
+
         BindUIFactory();
 
         BindUIViewInstantiator();
@@ -27,6 +35,28 @@ public sealed class MainMenuCoreInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<UIViewInstantiator>().AsSingle();
     }
+
+    private void BindPoolingService()
+    {
+        Container.BindInterfacesAndSelfTo<MainMenuPoolingService>().AsSingle();
+    }
+
+    private void BindMainMenuFactories()
+    {
+        Container.Bind<FactoryMonoBehaviourBase<WindowView>>().To<ScreenSpaceUIFactory>().AsSingle();
+    }
+
+    private void BindPoolContainersManager()
+    {
+        Container.BindInterfacesAndSelfTo<PoolParentContainersManager>().FromComponentInNewPrefabResource($"{ResourcesPaths.Infrastructure}ObjectPools").AsSingle();
+    }
+
+    private void BindAddressablePrefabInstantiator()
+    {
+        Container.BindInterfacesAndSelfTo<AddressablePrefabInstantiator>().AsSingle();
+    }
+
+
 
     private void BindMainMenuCore()
     {

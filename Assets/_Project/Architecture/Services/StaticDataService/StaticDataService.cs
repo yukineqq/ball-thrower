@@ -20,17 +20,6 @@ public sealed class StaticDataService : IStaticDataService
         Debug.Log("static data service created");
     }
 
-    public async UniTask InitializeAsync()
-    {
-        List<UniTask> tasks = new List<UniTask>();
-
-        tasks.Add(UniTask.WaitForEndOfFrame());
-
-        await UniTask.WhenAll(tasks);
-
-        Debug.Log("static data service initialized");
-    }
-
     private async UniTask<List<string>> GetConfigsKeys<TConfig>()
     {
         return await _assetProvider.GetAssetsListByLabel(AssetLabels.Config);
