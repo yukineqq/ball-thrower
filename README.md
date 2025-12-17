@@ -1,1 +1,6 @@
 small mini golf like game
+
+to understand the overall flow of the application, here is the project's general high-level overview:
+application driven by nested state machines - global, which determines the global state of the entire application, and local, which also has its own states, but within the boundaries of the main scene.
+All starts with ApplicationInstaller, which in addition to registering dependencies, it ultimately initializes ApplicationRunner, which checks for the presence of ApplicationBootstrapper on the scene and registers global states, sending them to the first one - GameBootstrapState. 
+After completing this, the application transitions to the main menu state. Within each global state (GameBootstrapState, GameMainMenuState, GameGameplayState, etc), the application switches to a scene where there is a local SceneContext, whose logic is almost identical to that described above: the installer registers dependencies > creates an entity that fills the local state machine with states and sends it to the first one. Thus, local states are completely isolated from global states and deal exclusively with their own area of responsibility, while global states only switch the overall state of the application.
